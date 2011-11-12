@@ -13,7 +13,7 @@ class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTim
    function findNthWeekdayInMonth($day, $offset, $reverse = false) { // supply the month, year, day and offset
       $this->_reverse = $reverse;
 
-      $firstDay = $this->_getStartDayOfMonth();
+      $firstDay = $this->_getStartDayOfMonth($reverse);
 
       $currentStamp = clone $firstDay;
       $results = 0;
@@ -32,20 +32,28 @@ class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTim
       }
    }
 
-   public function findNthDayOfMonth($day, $reverse = false) {
-      $iteratorFunc = (($day < 0 ) ? 'sub' : 'add');
-      return $this->_getStartDayOfMonth()->$iteratorFunc(new DateInterval('P' . abs($day) . 'D'));
+   public function findNthDayOfMonth($day) {
+      if ($day < 0 ) {
+         $iteratorFunc = 'sub';
+         $reverse = true;
+         $day ++;
+      } else {
+         $iteratorFunc = 'add';
+         $reverse = false;
+      }
+      return $this->_getStartDayOfMonth($reverse)->$iteratorFunc(new DateInterval('P' . abs($day) . 'D'));
    }
    
    
 
-   private function _getStartDayOfMonth() {
+   private function _getStartDayOfMonth($reverse = null) {
+      $this->_reverse = $reverse;
       $day = new Application_Model_AppDateTime($this->format('Y') . '-' . $this->format('m') . '-01');
-      if ($this->_reverse !== true) {
-         return $day;
-      } else {
-         return $day->add(new DateInterval('P1M'))->sub(new DateInterval('P1D'));
+      if ($this->_reverse == true) {
+         $day->add(new DateInterval('P1M'));
+         $day->sub(new DateInterval('P1D'));
       }
+      return $day;
    }
 
 }

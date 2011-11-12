@@ -9,8 +9,8 @@ class IndexController extends Zend_Controller_Action {
 
    public function indexAction() {
       $cal = new Application_Model_Calendar();
-      $cal->setYear(2012);
-
+      $cal->setYear(2010);
+      
       $fundraisers = Application_Model_CalendarEntry::get('Fundraiser');
       $cal->addGroup($fundraisers);
 

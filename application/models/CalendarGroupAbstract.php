@@ -83,9 +83,9 @@ abstract class Application_Model_CalendarGroupAbstract implements Application_Mo
 
    public function getEntries($year, $month) {
       $this->_rendered_dates = array();
-      if (is_array($this->_monthly_pattern) && in_array($month, $this->_monthly_pattern)) {
+      if ((is_array($this->_monthly_pattern) && in_array($month, $this->_monthly_pattern)) || ($this->_monthly_pattern == NULL)) {
 
-         if ($this->_monthly_day_pattern) {
+         if ($this->_monthly_day_pattern !== NULL) {
             $rt = new Application_Model_ReoccurenceTemplate("$year-$month-01");
             $rendered_date = $rt->findNthDayOfMonth($this->_monthly_day_pattern);
             if ($this->_monthly_exception_callback) {

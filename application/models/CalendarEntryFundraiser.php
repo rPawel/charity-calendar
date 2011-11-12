@@ -11,7 +11,7 @@ class Application_Model_CalendarEntryFundraiser extends Application_Model_Calend
                  if ($rendered_date->isWeekDay()) {
                     $result = $rendered_date;
                  } else {
-                    $alt_date = new Application_Model_AppDateTime($rendered_date->format('Y-m-01'));
+                    $alt_date = new Application_Model_ReoccurenceTemplate($rendered_date->format('Y-m-01'));
                     $result = $alt_date->findNthWeekdayInMonth(3, 1, true);
                  }
                  return $result;
