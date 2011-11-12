@@ -1,6 +1,6 @@
 <?php
 
-//require_once dirname(__FILE__) . '/../../../application/models/ReoccurenceTemplate.php';
+require_once dirname(__FILE__) . '/../../../application/models/ReoccurenceTemplate.php';
 
 /**
  * Test class for Application_Model_ReoccurenceTemplate.
@@ -58,13 +58,6 @@ class Application_Model_ReoccurenceTemplateTest extends PHPUnit_Framework_TestCa
       $this->assertEquals(1322611200, $this->object->findStartDayOfMonth(11, 2011, true)->getTimestamp());
    }
    
-   public function testIsWeekDay() {
-      //Thursday
-      $this->assertTrue($this->object->isWeekDay(new DateTime('2011-11-10')));
-      //Saturday
-      $this->assertFalse($this->object->isWeekDay(new DateTime('2011-11-12')));
-      
-   }
 }
 
 ?>

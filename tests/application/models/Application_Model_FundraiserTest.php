@@ -33,9 +33,12 @@ class Application_Model_FundraiserTest extends PHPUnit_Framework_TestCase {
    }
 
    public function testGetEntries() {
-//      $this->assertEquals(false, $this->object->getEntries(2011, 11));
+      //No Fundraiser this month
+      $this->assertEquals(false, $this->object->getEntries(2011, 11));
+      //Last day is a weekday
       $this->assertEquals(1314748800, $this->object->getEntries(2011, 8)->getTimestamp());
-//      $this->assertEquals(1266969600, $this->object->getEntries(2010, 2)->getTimestamp());
+      //Last day is weekend
+      $this->assertEquals(1266969600, $this->object->getEntries(2010, 2)->getTimestamp());
    }
 
 }

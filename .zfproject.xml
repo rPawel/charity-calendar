@@ -24,6 +24,15 @@
         <modelFile modelName="CalendarList"/>
         <modelFile modelName="ReoccurenceTemplate"/>
         <modelFile modelName="CalendarEntryList"/>
+        <modelFile modelName="AppDateTime"/>
+        <modelFile modelName="CalendarCsvDecorator"/>
+        <modelFile modelName="CalendarDecoratorCsv"/>
+        <modelFile modelName="CalendarDecoratorAbstract"/>
+        <modelFile modelName="CalendarAbstract"/>
+        <modelFile modelName="CalendarInterface"/>
+        <modelFile modelName="CalendarDecoratorInterface"/>
+        <modelFile modelName="CalendarEntry"/>
+        <modelFile modelName="CalendarEntryAbstract"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>
