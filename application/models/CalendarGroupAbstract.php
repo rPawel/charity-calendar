@@ -86,14 +86,7 @@ abstract class Application_Model_CalendarGroupAbstract implements Application_Mo
       if ((is_array($this->_monthly_pattern) && in_array($month, $this->_monthly_pattern)) || ($this->_monthly_pattern == NULL)) {
 
          if ($this->_monthly_day_pattern !== NULL) {
-            $rt = new Application_Model_ReoccurenceTemplate("$year-$month-01");
-            $rendered_date = $rt->findNthDayOfMonth($this->_monthly_day_pattern);
-            if ($this->_monthly_exception_callback) {
-               $callback = $this->_monthly_exception_callback;
-               $this->_rendered_dates[] = $callback($rendered_date);
-            } else {
-               $this->_rendered_dates[] = $rendered_date;
-            }
+            $this->_rendered_dates[] = $this->_getMonthlyDayPatternEntries($year, $month);
          }
 
          if (is_array($this->_weekday_pattern)) {
@@ -106,6 +99,18 @@ abstract class Application_Model_CalendarGroupAbstract implements Application_Mo
          }
       }
       return $this->_rendered_dates;
+      
+   }
+   
+   private function _getMonthlyDayPatternEntries($year, $month) {
+      $rt = new Application_Model_ReoccurenceTemplate("$year-$month-01");
+      $rendered_date = $rt->findNthDayOfMonth($this->_monthly_day_pattern);
+      
+      if ($this->_monthly_exception_callback) {
+         $callback = $this->_monthly_exception_callback;
+         $rendered_date = $callback($rendered_date);
+      }
+      return $rendered_date;
       
    }
 

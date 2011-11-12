@@ -20,10 +20,8 @@ class Application_Model_Calendar extends Application_Model_CalendarAbstract {
    }
 
    public function getAgenda() {
-//      echo "I have " . $this->_group_list->count() . " groups\n";
 
       for ($month = 1; $month <= 12; $month++) {
-//         echo "Month:" . $month . "\n";
          $this->_group_list->rewind();
          while ($this->_group_list->valid()) {
             $group = $this->_group_list->current();

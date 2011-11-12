@@ -1,8 +1,7 @@
 <?php
 
-interface Application_Model_CalendarDecoratorInterface
-{
-   public function draw();
+interface Application_Model_CalendarDecoratorInterface {
 
+   function _decorate();
 }
 
