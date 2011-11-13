@@ -5,6 +5,12 @@
  */
 class Application_Model_CalendarEntry {
 
+   /**
+    * Factory of the Calendar Entries
+    * 
+    * @param string $type
+    * @return Application_Model_CalendarEntryFundraiser 
+    */
    public static function get($type) {
       switch ($type) {
          case 'Fundraiser':

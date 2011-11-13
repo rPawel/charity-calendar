@@ -1,7 +1,13 @@
 <?php
 
+/**
+ * Fundraiser class
+ */
 class Application_Model_CalendarEntryFundraiser extends Application_Model_CalendarGroupAbstract {
 
+   /**
+    * Constructor 
+    */
    public function __construct() {
       $this->_setName('Fundraiser');
       $this->_setReoccurent(true);

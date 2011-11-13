@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * Reoccurence template
+ */
 class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTime {
 
+   /**
+    * Flag used to keep the fact that the offset has to be calculated from the end of the month
+    * @var bool 
+    */
    private $_reverse = null;
 
    /**
-    *
-    * @param string $day 1 (Monday), 2 ...
-    * @param integer $offset Nth occurence of the weekday
-    * @return type Application_Model_AppDateTime
+    * Finds a weekday within given month
+    * 
+    * @param integer $day 1=Monday,2=Tuesday...
+    * @param integer $offset 1=first Monday,2=second Monday...
+    * @param bool $reverse If true, offset will be calculated from the end of the month
+    * @return Application_Model_AppDateTime 
     */
    function findNthWeekdayInMonth($day, $offset, $reverse = false) { // supply the month, year, day and offset
       $this->_reverse = $reverse;
@@ -32,6 +41,12 @@ class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTim
       }
    }
 
+   /**
+    * Finds n-th number of the day within a given month
+    * 
+    * @param integer $day day number of the find, negative number like -1 means last day
+    * @return Application_Model_AppDateTime 
+    */
    public function findNthDayOfMonth($day) {
       if ($day < 0 ) {
          $iteratorFunc = 'sub';
@@ -48,7 +63,12 @@ class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTim
    }
    
    
-
+   /**
+    * Finds first|last day of the month from a given date
+    * 
+    * @param bool $reverse
+    * @return Application_Model_AppDateTime 
+    */
    private function _getStartDayOfMonth($reverse = null) {
       $this->_reverse = $reverse;
       $day = new Application_Model_AppDateTime($this->format('Y') . '-' . $this->format('m') . '-01');
