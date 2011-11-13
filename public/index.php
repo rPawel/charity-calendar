@@ -14,6 +14,10 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
+require_once 'Zend/Registry.php';
+if (isset ($argv)) 
+   Zend_Registry::set('argv', $argv);
+
 /** Zend_Application */
 require_once 'Zend/Application.php';
 
