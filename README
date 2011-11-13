@@ -1,6 +1,6 @@
 
 Usage from CLI
-   - [app-folder]/public/index.php 2010
+   - php [app-folder]/public/index.php 2010
 Usage via HTTP
    - [uri]/public/index.php?year=2010
 
