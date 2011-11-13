@@ -32,6 +32,8 @@ class IndexController extends Zend_Controller_Action {
          if (isset($argv[1]) and is_numeric($argv[1])) {
             $year = $argv[1];
          }
+      } elseif (APPLICATION_ENV == 'testing') {
+         $year = 2010;
       } else {
          if (isset($_GET['year']) and is_numeric($_GET['year'])) {
             $year = $_GET['year'];

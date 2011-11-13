@@ -37,9 +37,12 @@ class Application_Model_ReoccurenceTemplate extends Application_Model_AppDateTim
          $iteratorFunc = 'sub';
          $reverse = true;
          $day ++;
-      } else {
+      } elseif ($day > 0) {
          $iteratorFunc = 'add';
          $reverse = false;
+         $day --;
+      } else {
+         throw new Zend_Exception('day number can not be 0');
       }
       return $this->_getStartDayOfMonth($reverse)->$iteratorFunc(new DateInterval('P' . abs($day) . 'D'));
    }

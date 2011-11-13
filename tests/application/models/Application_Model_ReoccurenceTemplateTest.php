@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__FILE__) . '/../../../application/models/AppDateTime.php';
 require_once dirname(__FILE__) . '/../../../application/models/ReoccurenceTemplate.php';
 
 /**
@@ -31,31 +32,40 @@ class Application_Model_ReoccurenceTemplateTest extends PHPUnit_Framework_TestCa
 
    public function testFindNthWeekdayInMonth() {
 
-      //Returns the right object
-      $this->assertInstanceOf('DateTime', $this->object->findNthWeekdayInMonth(11, 2011, 'Wednesday', 2));
+      //Returns the right object $day, $offset, $reverse = false
+      
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertInstanceOf('DateTime', $this->object->findNthWeekdayInMonth(3, 2));
       
       //Second Wednesday in Nov 2011
-      $this->assertEquals(1320796800, $this->object->findNthWeekdayInMonth(11, 2011, 'Wednesday', 2)->getTimestamp(), 'wrong algorithm');
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertEquals(1320796800, $this->object->findNthWeekdayInMonth(3, 2)->getTimestamp(), 'wrong algorithm');
       //First Tuesday in Nov 2011
-      $this->assertEquals(1320105600, $this->object->findNthWeekdayInMonth(11, 2011, 'Tuesday', 1)->getTimestamp(), 'wrong algorithm');
+      $this->assertEquals(1320105600, $this->object->findNthWeekdayInMonth(2, 1)->getTimestamp(), 'wrong algorithm');
 
       //Second Wednesday in Nov 2011 Reverse
-      $this->assertEquals(1321488000, $this->object->findNthWeekdayInMonth(11, 2011, 'Thursday', 2, true)->getTimestamp(), 'wrong algorithm');
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertEquals(1321488000, $this->object->findNthWeekdayInMonth(4, 2, true)->getTimestamp(), 'wrong algorithm');
       //Last Wednesday in Nov 2011
-      $this->assertEquals(1322611200, $this->object->findNthWeekdayInMonth(11, 2011, 'Wednesday', 1, true)->getTimestamp(), 'wrong algorithm');
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertEquals(1322611200, $this->object->findNthWeekdayInMonth(3, 1, true)->getTimestamp(), 'wrong algorithm');
 
       //Fifth Monday in Feb 2011
-      $this->assertFalse($this->object->findNthWeekdayInMonth(02, 2011, 'Monday', 5), 'wrong algorithm');
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-02-01");
+      $this->assertFalse($this->object->findNthWeekdayInMonth(1, 5), 'wrong algorithm');
    }
 
-   public function testFindStartDayOfMonth() {
+   public function testFindNthDayOfMonth() {
       
       //Returns the right object
-      $this->assertInstanceOf('DateTime', $this->object->findStartDayOfMonth(11, 2011));
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertInstanceOf('DateTime', $this->object->findNthDayOfMonth(1));
       //First day of Nov 2011
-      $this->assertEquals(1320105600, $this->object->findStartDayOfMonth(11, 2011)->getTimestamp());
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertEquals(1320192000, $this->object->findNthDayOfMonth(2)->getTimestamp());
       //Last day of Nov 2011
-      $this->assertEquals(1322611200, $this->object->findStartDayOfMonth(11, 2011, true)->getTimestamp());
+      $this->object = new Application_Model_ReoccurenceTemplate("2011-11-01");
+      $this->assertEquals(1322611200, $this->object->findNthDayOfMonth(-1)->getTimestamp());
    }
    
 }
