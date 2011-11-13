@@ -1,0 +1,10 @@
+
+Usage from CLI
+   - [app-folder]/public/index.php 2010
+Usage via HTTP
+   - [uri]/public/index.php?year=2010
+
+Requirements:
+   PHP v5.3.5
+   Zend Framework v1.11.9
+   PHPUnit v3.5.14
